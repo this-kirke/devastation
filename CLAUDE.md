@@ -11,6 +11,11 @@
 - Show help: `make help`
 - Claude Code: `claude` (available in all containers)
 
+## Git Workflow
+- Commit style: Use descriptive messages with a summary line and detailed body
+- Branch naming: Use descriptive names prefixed with feature/, bugfix/, or docs/
+- Before committing: Run `git status` and `git diff` to review changes
+
 ## Testing
 - Test each container by running: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --version"`
 - Check plugins: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --headless '+Lazy check' +qa"`
