@@ -1,0 +1,64 @@
+# Improve colors
+set -g default-terminal "screen-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+
+# Set prefix to Ctrl+a
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Enable mouse mode
+set -g mouse on
+
+# Set the escape time to zero
+set -sg escape-time 0
+
+# Set history limit
+set -g history-limit 50000
+
+# Set vi mode
+setw -g mode-keys vi
+
+# Vim-like pane navigation
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Split panes using | and -
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# Resize panes with HJKL
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Create new windows in current path
+bind c new-window -c "#{pane_current_path}"
+
+# Reload config file
+bind r source-file $HOME/.config/tmux/config \; display "Config reloaded!"
+
+# Status bar styling
+set -g status-style fg=white,bg=black
+set -g window-status-current-style fg=black,bg=white,bold
+set -g status-interval 1
+set -g status-left-length 30
+set -g status-left '#[fg=green](#S) #(whoami) '
+set -g status-right '#[fg=yellow]#(cut -d " " -f 1-3 /proc/loadavg)#[default] #[fg=white]%H:%M:%S#[default]'
+
+# Enable activity alerts
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Enable Vim-like copy mode
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
