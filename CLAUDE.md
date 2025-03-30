@@ -38,7 +38,7 @@
 - Language-specific images extend base with specialized tools
 - XDG-style configuration in .config directory:
   - Zsh config in .config/zsh/ with ZDOTDIR environment variable
-  - Tmux config in .config/tmux/
+  - Tmux config in .config/tmux/tmux.conf
   - Neovim config in .config/nvim/
 - Neovim config naming pattern:
   - Base configs: `config/lsp-base.lua`, `config/treesitter-base.lua`, `config/dap-base.lua`
