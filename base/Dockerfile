@@ -21,6 +21,8 @@ ENV TERM=xterm-256color
 # Set zsh to look for dotfiles in ~/.config/zsh instead of home directory
 ENV ZDOTDIR=/home/$USERNAME/.config/zsh
 
+ENV CLAUDE_CONFIG_DIR=/home/$USERNAME/.config/claude
+
 ###################
 # SYSTEM SETUP
 ###################
@@ -47,9 +49,6 @@ RUN locale-gen en_US.UTF-8
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
-
-# Install Claude Code
-RUN npm install -g "@anthropic-ai/claude-code"
 
 # Install Meslo Nerd Font
 RUN mkdir -p /usr/share/fonts/truetype/meslo-nerd-font \
@@ -86,11 +85,22 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Switch to non-root user for all configuration
 USER $USERNAME
 
-# Install Oh My Zsh and plugins
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
-    && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k \
-    && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
-    && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Install Oh My Zsh and plugins to XDG location
+RUN mkdir -p $ZDOTDIR
+
+# Configure npm to use XDG directories
+ENV NPM_CONFIG_USERCONFIG=/home/$USERNAME/.config/npm/npmrc
+ENV NPM_CONFIG_CACHE=/home/$USERNAME/.config/npm/cache
+ENV NPM_CONFIG_PREFIX=/home/$USERNAME/.config/npm/global
+ENV NPM_CONFIG_INIT_MODULE=/home/$USERNAME/.config/npm/config/npm-init.js
+
+RUN npm install -g "@anthropic-ai/claude-code"
+
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \ 
+	&& git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZDOTDIR/ohmyzsh/custom/themes/powerlevel10k \
+	&& git clone https://github.com/zsh-users/zsh-autosuggestions $ZDOTDIR/ohmyzsh/custom/plugins/zsh-autosuggestions \
+	&& git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/ohmyzsh/custom/plugins/zsh-syntax-highlighting
+
 
 ###################
 # COPY CONFIG FILES
