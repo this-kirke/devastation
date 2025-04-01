@@ -38,6 +38,8 @@ dotnet: base
 	@echo "Building dotnet devastation..."
 	docker buildx build \
 		--build-arg USERNAME=$(USERNAME) \
+		--build-arg DOTNET_VERSION=9.0 \
+		--build-arg DOTNET_SDK_VERSION=9.0.3 \
 		-t devastation/dotnet:latest \
 		./dotnet
 
