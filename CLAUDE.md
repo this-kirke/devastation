@@ -9,7 +9,6 @@
 - Neovim plugin install: `nvim --headless "+Lazy! sync" +qa`
 - Treesitter update: `nvim --headless "+TSUpdateSync" +qa`
 - Show help: `make help`
-- Claude Code: `claude` (available in all containers)
 
 ## Git Workflow
 - Commit style: Use descriptive messages with a summary line and detailed body
@@ -19,7 +18,6 @@
 ## Testing
 - Test each container by running: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --version"`
 - Check plugins: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --headless '+Lazy check' +qa"`
-- Verify Claude Code: `docker run -it --rm devastation/<container>:latest zsh -c "claude --version"`
 
 ## Code Style
 - **Indentation**: 2 spaces for Lua, 4 spaces for other languages
