@@ -19,6 +19,10 @@ tmux new-session -d -s dev -c "$PROJECT_DIR" -n "shell"
 tmux new-window -t dev:2 -c "$PROJECT_DIR" -n "editor"
 tmux send-keys -t dev:2 "nvim" C-m
 
+# Create a third window for claude
+tmux new-window -t dev:3 -c "$PROJECT_DIR" -n "claude"
+tmux send-keys -t dev:3 "claude" C-m
+
 # Select first window
 tmux select-window -t dev:1
 

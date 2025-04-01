@@ -31,6 +31,10 @@ tmux send-keys -t dev:4 "terraform -version" C-m
 tmux new-window -t dev:5 -c "$PROJECT_DIR" -n "kubectl"
 tmux send-keys -t dev:5 "kubectl version --client" C-m
 
+# Create a sixth window for claude
+tmux new-window -t dev:6 -c "$PROJECT_DIR" -n "claude"
+tmux send-keys -t dev:6 "claude" C-m
+
 # Select first window
 tmux select-window -t dev:1
 
