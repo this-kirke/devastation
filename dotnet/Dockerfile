@@ -5,16 +5,17 @@ LABEL description=".NET development environment with Neovim, LSP, and debugging 
 
 # Build arguments
 ARG USERNAME=dev
-ARG DOTNET_VERSION=9.0
-ARG DOTNET_SDK_VERSION=${DOTNET_VERSION}.3
 
 # Environment variables
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 ENV DOTNET_NOLOGO=true
-ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+ENV DOTNET_CLI_HOME=/home/$USERNAME/.config
+ENV NUGET_PLUGIN_PATHS=/home/$USERNAME/.local/share/NuGet/
 ENV NUGET_XMLDOC_MODE=skip
+ENV PATH=${PATH}:${NUGET_PLUGIN_PATHS}
 
 ###################
+ 
 # ROOT OPERATIONS
 ###################
 
@@ -29,20 +30,29 @@ RUN apt-get update && apt-get install -y \
     jq \
     && rm -rf /var/lib/apt/lists/*
 
-# Install .NET SDK
-RUN DOTNET_JSON_URL="https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${DOTNET_VERSION}/releases.json" && \
-    echo "Downloading from metadata URL: $DOTNET_JSON_URL" && \
-    curl -s $DOTNET_JSON_URL > dotnet-releases.json && \
-    SDK_DOWNLOAD_URL=$(jq -r '.releases[0].sdk.files[] | select(.rid=="linux-x64") | .url' dotnet-releases.json) && \
-    echo "Using SDK download URL: $SDK_DOWNLOAD_URL" && \
+# Install .NET 8 SDK
+RUN DOTNET8_VERSION=8.0 && \
+    DOTNET8_JSON_URL="https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${DOTNET8_VERSION}/releases.json" && \
+    echo "Downloading from metadata URL: $DOTNET8_JSON_URL" && \
+    curl -s $DOTNET8_JSON_URL > dotnet8-releases.json && \
+    SDK8_DOWNLOAD_URL=$(jq -r '.releases[0].sdk.files[] | select(.rid=="linux-x64") | .url' dotnet8-releases.json) && \
+    echo "Using .NET 8 SDK download URL: $SDK8_DOWNLOAD_URL" && \
     mkdir -p /usr/share/dotnet && \
-    curl -SL "$SDK_DOWNLOAD_URL" -o dotnet-sdk.tar.gz && \
-    tar -xzf dotnet-sdk.tar.gz -C /usr/share/dotnet && \
-    rm dotnet-sdk.tar.gz dotnet-releases.json && \
+    curl -SL "$SDK8_DOWNLOAD_URL" -o dotnet8-sdk.tar.gz && \
+    tar -xzf dotnet8-sdk.tar.gz -C /usr/share/dotnet && \
+    rm dotnet8-sdk.tar.gz dotnet8-releases.json && \
     ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
-# Install Azure Artifacts Credential Provider
-RUN curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
+# Install .NET 9 SDK
+RUN DOTNET9_VERSION=9.0 && \
+    DOTNET9_JSON_URL="https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${DOTNET9_VERSION}/releases.json" && \
+    echo "Downloading from metadata URL: $DOTNET9_JSON_URL" && \
+    curl -s $DOTNET9_JSON_URL > dotnet9-releases.json && \
+    SDK9_DOWNLOAD_URL=$(jq -r '.releases[0].sdk.files[] | select(.rid=="linux-x64") | .url' dotnet9-releases.json) && \
+    echo "Using .NET 9 SDK download URL: $SDK9_DOWNLOAD_URL" && \
+    curl -SL "$SDK9_DOWNLOAD_URL" -o dotnet9-sdk.tar.gz && \
+    tar -xzf dotnet9-sdk.tar.gz -C /usr/share/dotnet && \
+    rm dotnet9-sdk.tar.gz dotnet9-releases.json
 
 # Add .NET specific entrypoint script
 COPY ./entrypoint.sh /usr/local/bin/dotnet-entrypoint.sh
@@ -55,14 +65,14 @@ RUN chmod +x /usr/local/bin/dotnet-entrypoint.sh
 # Switch to non-root user for all configuration
 USER $USERNAME
 
-# Copy .NET-specific Neovim configuration
-COPY --chown=$USERNAME:$USERNAME ./config/nvim /home/$USERNAME/.config/nvim/
+# Copy the configuration directory 
+COPY --chown=$USERNAME:$USERNAME .config /home/$USERNAME/.config
 
 # Install Treesitter parser for C#
 RUN nvim --headless "+TSInstall c_sharp" +qa
 
 # Install global .NET tools
-RUN dotnet tool install --global Reqnroll.Tools.CLI
+RUN dotnet tool install --global dotnet-format
 
 WORKDIR /home/$USERNAME/project
 ENTRYPOINT ["/usr/local/bin/dotnet-entrypoint.sh"]
