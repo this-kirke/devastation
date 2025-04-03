@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
     make \
     ripgrep \
     sudo \
+    tree \
     tmux \
     unzip \
     zsh \
