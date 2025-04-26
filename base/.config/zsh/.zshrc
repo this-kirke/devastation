@@ -44,6 +44,11 @@ bindkey '^R' history-incremental-search-backward
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/.npmrc"
 export PATH="$HOME/.config/npm/global/bin:$PATH"
 
-# Source Powerlevel10k config
+# Initialize atuin
+#eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(atuin init zsh)"
 
+# Source Powerlevel10k config
 [[ -f ${ZDOTDIR}/p10k.zsh ]] && source ${ZDOTDIR}/p10k.zsh
+
+

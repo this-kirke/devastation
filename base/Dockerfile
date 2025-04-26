@@ -17,11 +17,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
-ENV TERM=xterm-256color
-# Set zsh to look for dotfiles in ~/.config/zsh instead of home directory
-ENV ZDOTDIR=/home/$USERNAME/.config/zsh
-
-ENV CLAUDE_CONFIG_DIR=/home/$USERNAME/.config/claude
 
 ###################
 # SYSTEM SETUP
@@ -64,6 +59,12 @@ RUN curl -fsSL https://github.com/neovim/neovim/releases/latest/download/nvim-li
     && ln -s /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim \
     && rm /tmp/nvim.tar.gz
 
+# Install atuin
+COPY ./atuin-installer.sh /tmp/atuin-installer.sh
+RUN chmod +x /tmp/atuin-installer.sh && \
+    ATUIN_INSTALL_DIR=/usr/local/bin ATUIN_NO_MODIFY_PATH=1 /tmp/atuin-installer.sh && \
+    rm /tmp/atuin-installer.sh
+
 # Add entrypoint script
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
@@ -86,6 +87,13 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Switch to non-root user for all configuration
 USER $USERNAME
 
+ENV TERM=xterm-256color
+
+# Set zsh to look for dotfiles in ~/.config/zsh instead of home directory
+ENV ZDOTDIR=/home/$USERNAME/.config/zsh
+
+ENV CLAUDE_CONFIG_DIR=/home/$USERNAME/.config/claude
+
 # Install Oh My Zsh and plugins to XDG location
 RUN mkdir -p $ZDOTDIR
 
@@ -101,7 +109,6 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 	&& git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZDOTDIR/ohmyzsh/custom/themes/powerlevel10k \
 	&& git clone https://github.com/zsh-users/zsh-autosuggestions $ZDOTDIR/ohmyzsh/custom/plugins/zsh-autosuggestions \
 	&& git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/ohmyzsh/custom/plugins/zsh-syntax-highlighting
-
 
 ###################
 # COPY CONFIG FILES
