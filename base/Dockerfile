@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y \
     locales \
     make \
     ripgrep \
+    plantuml \
     sudo \
     tree \
     tmux \

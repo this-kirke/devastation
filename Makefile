@@ -4,7 +4,7 @@
 USERNAME ?= $(shell whoami)
 
 # Targets
-.PHONY: all base python cluster dotnet clean
+.PHONY: all base python cluster dotnet clean docs clean-docs
 
 # Build all images
 all: base python cluster dotnet
@@ -51,6 +51,20 @@ clean:
 	-docker rmi devastation/dotnet:latest
 	-docker rmi devastation/base:latest
 
+# Generate documentation
+docs:
+	@echo "Generating documentation..."
+	@which plantuml > /dev/null || (echo "PlantUML not found. Please install it first." && exit 1)
+	@cat docs/src/architecture.puml | plantuml -tsvg -pipe > docs/devastation_architecture.svg
+	@$(MAKE) -C docs/src all
+	@echo "Documentation generated in docs/"
+
+# Remove generated documentation
+clean-docs:
+	@echo "Cleaning documentation files..."
+	@$(MAKE) -C docs/src clean
+	@echo "Documentation files cleaned"
+
 # Show help
 help:
 	@echo "Devastation - Docker-based Development Environments"
@@ -65,6 +79,8 @@ help:
 	@echo "  cluster      Build Cluster devastation (depends on base)"
 	@echo "  dotnet       Build .NET devastation (depends on base)"
 	@echo "  clean        Remove all devastation images"
+	@echo "  docs         Generate documentation diagrams using PlantUML"
+	@echo "  clean-docs   Clean generated documentation files"
 	@echo "  help         Show this help message"
 	@echo ""
 	@echo "Variables:"

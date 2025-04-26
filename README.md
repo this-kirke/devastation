@@ -10,15 +10,25 @@ This project provides a set of Docker containers ("devastations") that create co
 
 The project follows a layered container architecture:
 
-![Devastation Architecture](architecture.svg)
+![Devastation Architecture](docs/devastation_architecture.svg)
 
 ### base devastation
+
+![Base Devastation Architecture](docs/base_architecture.svg)
 
 The base devastation includes:
 
 - Ubuntu 22.04 LTS
 - zsh with Oh-My-Zsh and Powerlevel10k theme
 - Meslo Nerd Font
+- Development tools:
+  - Git 
+  - Node.js 20
+  - PlantUML
+  - Tree
+  - Atuin (shell history manager)
+  - Claude Code CLI
+  - Curl, fd-find, ripgrep
 - Neovim with the following plugins:
   - Lazy (plugin manager)
   - Solarized Dark color scheme
@@ -47,9 +57,24 @@ Each language devastation extends the base image with:
    - DAP configuration
 
 language devastations include:
-- **.NET**: Latest .NET SDK and runtime
-- **Python**: Python 3 with poetry and common data science packages
-- **Cluster**: Kubernetes and cloud infrastructure tools
+
+#### Python Devastation
+![Python Devastation Architecture](docs/python_architecture.svg)
+- Python 3.11 with poetry
+- Python debugging and testing tools
+- Python-specific LSP and Treesitter configurations
+
+#### .NET Devastation
+![.NET Devastation Architecture](docs/dotnet_architecture.svg)
+- .NET 8 and 9 SDKs
+- .NET formatting tools
+- C# Treesitter support
+
+#### Cluster Devastation
+![Kubernetes Devastation Architecture](docs/cluster_architecture.svg)
+- Kubernetes tools: kubectl, Helm
+- Cloud tools: AWS CLI, Terraform
+- Infrastructure-as-Code language support
 
 ## Usage
 

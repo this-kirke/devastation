@@ -1,0 +1,56 @@
+@startuml python devastation architecture
+
+' color definitions - royal blue theme
+!define ROYAL_BLUE #4169E1
+!define LIGHT_BLUE #F0F8FF
+!define DARK_BLUE #27408B
+
+' global style
+skinparam {
+  FontName "Meslo Nerd Font"
+  FontColor #333333
+  BorderColor ROYAL_BLUE
+  ArrowColor ROYAL_BLUE
+  BackgroundColor white
+  shadowing false
+}
+
+' class styling
+skinparam class {
+  BorderThickness 1.5
+  FontSize 13
+  BackgroundColor LIGHT_BLUE
+  HeaderBackgroundColor ROYAL_BLUE
+  HeaderFontColor white
+  HeaderFontSize 16
+}
+
+' title styling
+skinparam title {
+  FontSize 20
+  FontColor DARK_BLUE
+  FontStyle bold
+  BorderColor white
+}
+
+title python devastation components
+
+hide circle
+hide stereotypes
+
+class "python devastation" as PyDev {
+  -- <color:ROYAL_BLUE><b>python runtime</b></color> --
+  python 3.11
+  
+  -- <color:ROYAL_BLUE><b>python tools</b></color> --
+  poetry (package manager)
+  debugpy
+  pytest
+  
+  -- <color:ROYAL_BLUE><b>neovim python extensions</b></color> --
+  python lsp server
+  python treesitter
+  python dap support
+}
+
+@enduml
