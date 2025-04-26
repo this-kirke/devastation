@@ -1,5 +1,9 @@
 # Devastation
 
+<p align="center">
+  <img src="assets/devastation_logo.png" alt="Devastation Logo" width="300">
+</p>
+
 A collection of specialized Docker development environments built on a common base.
 
 ## project goal
