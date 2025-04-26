@@ -71,8 +71,5 @@ COPY --chown=$USERNAME:$USERNAME .config /home/$USERNAME/.config
 # Install Treesitter parser for C#
 RUN nvim --headless "+TSInstall c_sharp" +qa
 
-# Install global .NET tools
-RUN dotnet tool install --global dotnet-format
-
 WORKDIR /home/$USERNAME/project
 ENTRYPOINT ["/usr/local/bin/dotnet-entrypoint.sh"]
