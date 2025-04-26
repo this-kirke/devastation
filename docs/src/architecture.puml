@@ -1,20 +1,19 @@
-@startuml Devastation Architecture
+@startuml devastation_architecture
+
 
 ' Set the layout direction to top to bottom
 top to bottom direction
 skinparam linetype ortho
 
 ' Define components
-rectangle "base\ndevastation" as base
-
-rectangle ".net\ndevastation" as dotnet
-rectangle "go\ndevastation" as go
-rectangle "python\ndevastation" as python
-rectangle "rust\ndevastation" as rust
-rectangle "kubernetes\ndevastation" as k8s
-
-rectangle "your\ndevastation" as your1
-rectangle "your\ndevastation" as your2
+rectangle "base" as base
+rectangle ".net" as dotnet
+rectangle "go" as go
+rectangle "python" as python
+rectangle "rust" as rust
+rectangle "kubernetes" as k8s
+rectangle "your\nproject" as your1
+rectangle "your\nproject" as your2
 
 ' Define relationships
 base --> dotnet

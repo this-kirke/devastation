@@ -4,6 +4,7 @@
 PLANTUML=plantuml
 ARGS=-tsvg -overwrite
 OUTPUT_DIR=..
+STYLE_FILE=styles.puml
 
 # List of all PlantUML source files
 PUML_FILES := $(wildcard *.puml)
@@ -15,7 +16,7 @@ all: $(SVG_FILES)
 # Rule to generate SVG from PlantUML
 $(OUTPUT_DIR)/%.svg: %.puml
 	@echo "Generating $@..."
-	@cat $< | $(PLANTUML) -tsvg -pipe > $@
+	@cat $< | $(PLANTUML) -tsvg -pipe -I $(STYLE_FILE) > $@
 	@echo "Generated $@"
 
 # Clean target

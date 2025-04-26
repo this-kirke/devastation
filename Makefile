@@ -55,7 +55,6 @@ clean:
 docs:
 	@echo "Generating documentation..."
 	@which plantuml > /dev/null || (echo "PlantUML not found. Please install it first." && exit 1)
-	@cat docs/src/architecture.puml | plantuml -tsvg -pipe > docs/devastation_architecture.svg
 	@$(MAKE) -C docs/src all
 	@echo "Documentation generated in docs/"
 

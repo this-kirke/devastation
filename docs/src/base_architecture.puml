@@ -1,37 +1,4 @@
-@startuml base devastation architecture
-
-' color definitions - royal blue theme
-!define ROYAL_BLUE #4169E1
-!define LIGHT_BLUE #F0F8FF
-!define DARK_BLUE #27408B
-
-' global style
-skinparam {
-  FontName "Meslo Nerd Font"
-  FontColor #333333
-  BorderColor ROYAL_BLUE
-  ArrowColor ROYAL_BLUE
-  BackgroundColor white
-  shadowing false
-}
-
-' class styling
-skinparam class {
-  BorderThickness 1.5
-  FontSize 13
-  BackgroundColor LIGHT_BLUE
-  HeaderBackgroundColor ROYAL_BLUE
-  HeaderFontColor white
-  HeaderFontSize 16
-}
-
-' title styling
-skinparam title {
-  FontSize 20
-  FontColor DARK_BLUE
-  FontStyle bold
-  BorderColor white
-}
+@startuml base_architecture
 
 title base devastation components
 
@@ -39,16 +6,16 @@ hide circle
 hide stereotypes
 
 class "base devastation" as BaseDev {
-  -- <color:ROYAL_BLUE><b>os</b></color> --
+  -- <color:ORANGE><b>os</b></color> --
   ubuntu 22.04 lts
   
-  -- <color:ROYAL_BLUE><b>shell environment</b></color> --
+  -- <color:ORANGE><b>shell environment</b></color> --
   zsh + oh-my-zsh
   powerlevel10k theme
   meslo nerd font
   tmux
   
-  -- <color:ROYAL_BLUE><b>development tools</b></color> --
+  -- <color:ORANGE><b>development tools</b></color> --
   git
   node.js 20
   curl / fd-find / ripgrep
@@ -58,7 +25,7 @@ class "base devastation" as BaseDev {
   atuin (shell history)
   claude code cli
   
-  -- <color:ROYAL_BLUE><b>neovim</b></color> --
+  -- <color:ORANGE><b>neovim</b></color> --
   lazy (plugin manager)
   telescope (fuzzy finder)
   neo-tree (file browser)

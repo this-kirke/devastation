@@ -1,37 +1,5 @@
-@startuml cluster devastation architecture
+@startuml cluster_architecture
 
-' color definitions - royal blue theme
-!define ROYAL_BLUE #4169E1
-!define LIGHT_BLUE #F0F8FF
-!define DARK_BLUE #27408B
-
-' global style
-skinparam {
-  FontName "Meslo Nerd Font"
-  FontColor #333333
-  BorderColor ROYAL_BLUE
-  ArrowColor ROYAL_BLUE
-  BackgroundColor white
-  shadowing false
-}
-
-' class styling
-skinparam class {
-  BorderThickness 1.5
-  FontSize 13
-  BackgroundColor LIGHT_BLUE
-  HeaderBackgroundColor ROYAL_BLUE
-  HeaderFontColor white
-  HeaderFontSize 16
-}
-
-' title styling
-skinparam title {
-  FontSize 20
-  FontColor DARK_BLUE
-  FontStyle bold
-  BorderColor white
-}
 
 title cluster devastation components
 
@@ -39,15 +7,15 @@ hide circle
 hide stereotypes
 
 class "cluster devastation" as ClusterDev {
-  -- <color:ROYAL_BLUE><b>kubernetes tools</b></color> --
+  -- <color:ORANGE><b>kubernetes tools</b></color> --
   kubectl
   helm
   
-  -- <color:ROYAL_BLUE><b>cloud tools</b></color> --
+  -- <color:ORANGE><b>cloud tools</b></color> --
   aws cli v2
   terraform
   
-  -- <color:ROYAL_BLUE><b>neovim cluster extensions</b></color> --
+  -- <color:ORANGE><b>neovim cluster extensions</b></color> --
   terraform lsp
   yaml lsp
   kubernetes treesitter

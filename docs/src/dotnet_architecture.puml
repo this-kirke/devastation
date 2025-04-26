@@ -1,37 +1,5 @@
-@startuml dotnet devastation architecture
+@startuml dotnet_architecture
 
-' color definitions - royal blue theme
-!define ROYAL_BLUE #4169E1
-!define LIGHT_BLUE #F0F8FF
-!define DARK_BLUE #27408B
-
-' global style
-skinparam {
-  FontName "Meslo Nerd Font"
-  FontColor #333333
-  BorderColor ROYAL_BLUE
-  ArrowColor ROYAL_BLUE
-  BackgroundColor white
-  shadowing false
-}
-
-' class styling
-skinparam class {
-  BorderThickness 1.5
-  FontSize 13
-  BackgroundColor LIGHT_BLUE
-  HeaderBackgroundColor ROYAL_BLUE
-  HeaderFontColor white
-  HeaderFontSize 16
-}
-
-' title styling
-skinparam title {
-  FontSize 20
-  FontColor DARK_BLUE
-  FontStyle bold
-  BorderColor white
-}
 
 title dotnet devastation components
 
@@ -39,11 +7,11 @@ hide circle
 hide stereotypes
 
 class "dotnet devastation" as DotnetDev {
-  -- <color:ROYAL_BLUE><b>dotnet sdks</b></color> --
+  -- <color:ORANGE><b>dotnet sdks</b></color> --
   dotnet 8 sdk
   dotnet 9 sdk
   
-  -- <color:ROYAL_BLUE><b>neovim dotnet extensions</b></color> --
+  -- <color:ORANGE><b>neovim dotnet extensions</b></color> --
   c# treesitter
 }
 

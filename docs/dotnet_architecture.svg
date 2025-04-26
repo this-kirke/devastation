@@ -1,32 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="174px" preserveAspectRatio="none" style="width:394px;height:174px;" version="1.1" viewBox="0 0 394 174" width="394px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="33.2813" style="stroke: #FFFFFF; stroke-width: 1.5;" width="381" x="2" y="2"/><text fill="#27408B" font-family="sans-serif" font-size="20" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="365" x="10" y="25.5645">dotnet devastation components</text><!--MD5=[22d5a36a5e5b38e3ac7de1f0d49c53ba]
-class DotnetDev--><rect fill="#F0F8FF" height="117.9609" id="DotnetDev" style="stroke: #A80036; stroke-width: 1.5;" width="174" x="106" y="45.2813"/><rect fill="#4169E1" height="25.1328" style="stroke: #A80036; stroke-width: 1.5;" width="174" x="106" y="45.2813"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="121" x="132.5" y="62.3481">dotnet devastation</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="107" x2="279" y1="70.4141" y2="70.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="112" y="101.4292">dotnet 8 sdk</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="112" y="114.2339">dotnet 9 sdk</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="116" y="127.0386"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="107" x2="155.5" y1="84.8164" y2="84.8164"/><text fill="#4169E1" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="75" x="155.5" y="88.1245">dotnet sdks</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="230.5" x2="279" y1="84.8164" y2="84.8164"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="112" y="156.6479">c# treesitter</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="107" x2="110" y1="140.0352" y2="140.0352"/><text fill="#4169E1" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="166" x="110" y="143.3433">neovim dotnet extensions</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="276" x2="279" y1="140.0352" y2="140.0352"/><!--MD5=[a78cc4e030029dbd7c4911c1ef4ccda6]
-@startuml dotnet devastation architecture
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="155px" preserveAspectRatio="none" style="width:293px;height:155px;" version="1.1" viewBox="0 0 293 155" width="293px" zoomAndPan="magnify"><defs><filter height="300%" id="f1joea41k4m91x" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="279" x="2" y="16.708">dotnet devastation components</text><!--MD5=[22d5a36a5e5b38e3ac7de1f0d49c53ba]
+class DotnetDev--><rect fill="#FEFECE" filter="url(#f1joea41k4m91x)" height="116.7969" id="DotnetDev" style="stroke: #A80036; stroke-width: 1.5;" width="174" x="54.5" y="27.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="120" x="81.5" y="44.0918">dotnet devastation</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="55.5" x2="227.5" y1="51.9219" y2="51.9219"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="60.5" y="82.937">dotnet 8 sdk</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="60.5" y="95.7417">dotnet 9 sdk</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="64.5" y="108.5464"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="55.5" x2="104" y1="66.3242" y2="66.3242"/><text fill="#FFA500" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="75" x="104" y="69.6323">dotnet sdks</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="179" x2="227.5" y1="66.3242" y2="66.3242"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="60.5" y="138.1558">c# treesitter</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="55.5" x2="58.5" y1="121.543" y2="121.543"/><text fill="#FFA500" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="166" x="58.5" y="124.8511">neovim dotnet extensions</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="224.5" x2="227.5" y1="121.543" y2="121.543"/><!--MD5=[d739e537225c7401e4debf0024972b3c]
+@startuml dotnet_architecture
 
-
-skinparam {
-  FontName "Meslo Nerd Font"
-  FontColor #333333
-  BorderColor #4169E1
-  ArrowColor #4169E1
-  BackgroundColor white
-  shadowing false
-}
-
-skinparam class {
-  BorderThickness 1.5
-  FontSize 13
-  BackgroundColor #F0F8FF
-  HeaderBackgroundColor #4169E1
-  HeaderFontColor white
-  HeaderFontSize 16
-}
-
-skinparam title {
-  FontSize 20
-  FontColor #27408B
-  FontStyle bold
-  BorderColor white
-}
 
 title dotnet devastation components
 
@@ -34,11 +9,11 @@ hide circle
 hide stereotypes
 
 class "dotnet devastation" as DotnetDev {
-  - - <color:#4169E1><b>dotnet sdks</b></color> - -
+  - - <color:ORANGE><b>dotnet sdks</b></color> - -
   dotnet 8 sdk
   dotnet 9 sdk
   
-  - - <color:#4169E1><b>neovim dotnet extensions</b></color> - -
+  - - <color:ORANGE><b>neovim dotnet extensions</b></color> - -
   c# treesitter
 }
 
