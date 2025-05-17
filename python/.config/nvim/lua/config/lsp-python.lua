@@ -1,5 +1,4 @@
 -- Python-specific LSP configuration
--- This file will be loaded after the base configuration
 
 local lspconfig = require('lspconfig')
 
@@ -7,7 +6,7 @@ local lspconfig = require('lspconfig')
 local capabilities = _G.devastation.lsp.capabilities
 local on_attach = _G.devastation.lsp.on_attach
 
--- Configure Python LSP
+-- Configure Python LSP (python-lsp-server)
 lspconfig.pylsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
@@ -15,28 +14,7 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         pycodestyle = {
-          enabled = true,
           maxLineLength = 100
-        },
-        jedi_completion = {
-          enabled = true,
-          include_params = true
-        },
-        jedi_definition = {
-          enabled = true
-        },
-        jedi_hover = {
-          enabled = true
-        },
-        jedi_references = {
-          enabled = true
-        },
-        jedi_signature_help = {
-          enabled = true
-        },
-        jedi_symbols = {
-          enabled = true,
-          all_scopes = true
         }
       }
     }

@@ -6,16 +6,7 @@ LABEL description=".NET development environment with Neovim, LSP, and debugging 
 # Build arguments
 ARG USERNAME=dev
 
-# Environment variables
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
-ENV DOTNET_NOLOGO=true
-ENV DOTNET_CLI_HOME=/home/$USERNAME/.config
-ENV NUGET_PLUGIN_PATHS=/home/$USERNAME/.local/share/NuGet/
-ENV NUGET_XMLDOC_MODE=skip
-ENV PATH=${PATH}:${NUGET_PLUGIN_PATHS}
-
 ###################
- 
 # ROOT OPERATIONS
 ###################
 

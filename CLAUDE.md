@@ -1,5 +1,9 @@
 # Devastation Development Guidelines
 
+## Claude Collaboration
+For working with Claude on Devastation development, refer to the workflow guidelines:
+- **Workflow Documentation**: See [claude/workflow.md](claude/workflow.md) for the complete development process
+
 ## Build Commands
 - Build all containers: `make all`
 - Build specific container: `make base`, `make python`, `make cluster`
