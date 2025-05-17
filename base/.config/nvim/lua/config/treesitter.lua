@@ -1,4 +1,2 @@
--- Load the base Treesitter configuration module
+-- Base Treesitter configuration loader
 require("config.treesitter-base")
-
--- This file can be used to add global Treesitter settings that apply to all images

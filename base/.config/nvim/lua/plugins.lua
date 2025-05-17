@@ -65,7 +65,7 @@ return require("lazy").setup({
       "folke/neodev.nvim", -- Lua development support
     },
     config = function()
-      require("config.lsp-base")
+      require("config.lsp")
     end,
   },
 
@@ -94,7 +94,7 @@ return require("lazy").setup({
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
-      require("config.treesitter-base")
+      require("config.treesitter")
     end,
   },
 
@@ -128,7 +128,7 @@ return require("lazy").setup({
       "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
-      require("config.dap-base")
+      require("config.dap")
     end,
   },
 
