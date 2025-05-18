@@ -1,5 +1,6 @@
 @startuml devastation_architecture
 
+!theme crt-amber
 
 ' Set the layout direction to top to bottom
 top to bottom direction

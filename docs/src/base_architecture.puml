@@ -1,21 +1,24 @@
 @startuml base_architecture
 
+!theme crt-amber
+
 title base devastation components
 
 hide circle
 hide stereotypes
-
 class "base devastation" as BaseDev {
-  -- <color:ORANGE><b>os</b></color> --
+  Theme crt-amber
+  
+  -- <b>os</b> --
   ubuntu 22.04 lts
   
-  -- <color:ORANGE><b>shell environment</b></color> --
+  -- <b>shell environment</b> --
   zsh + oh-my-zsh
   powerlevel10k theme
   meslo nerd font
   tmux
   
-  -- <color:ORANGE><b>development tools</b></color> --
+  -- <b>development tools</b> --
   git
   node.js 20
   curl / fd-find / ripgrep
@@ -25,7 +28,7 @@ class "base devastation" as BaseDev {
   atuin (shell history)
   claude code cli
   
-  -- <color:ORANGE><b>neovim</b></color> --
+  -- <b>neovim</b> --
   lazy (plugin manager)
   telescope (fuzzy finder)
   neo-tree (file browser)

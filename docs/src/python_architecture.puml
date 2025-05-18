@@ -1,5 +1,6 @@
 @startuml python_architecture
 
+!theme crt-amber
 
 title python devastation components
 
@@ -7,15 +8,16 @@ hide circle
 hide stereotypes
 
 class "python devastation" as PyDev {
-  -- <color:ORANGE><b>python runtime</b></color> --
+  Theme crt-amber
+  -- <b>python runtime</b> --
   python 3.11
   
-  -- <color:ORANGE><b>python tools</b></color> --
+  -- <b>python tools</b> --
   poetry (package manager)
   debugpy
   pytest
   
-  -- <color:ORANGE><b>neovim python extensions</b></color> --
+  -- <b>neovim python extensions</b> --
   python lsp server
   python treesitter
   python dap support

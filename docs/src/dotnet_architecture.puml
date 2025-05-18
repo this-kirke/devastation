@@ -1,5 +1,6 @@
 @startuml dotnet_architecture
 
+!theme crt-amber
 
 title dotnet devastation components
 
@@ -7,11 +8,12 @@ hide circle
 hide stereotypes
 
 class "dotnet devastation" as DotnetDev {
-  -- <color:ORANGE><b>dotnet sdks</b></color> --
+  Theme crt-amber
+  -- <b>dotnet sdks</b> --
   dotnet 8 sdk
   dotnet 9 sdk
   
-  -- <color:ORANGE><b>neovim dotnet extensions</b></color> --
+  -- <b>neovim dotnet extensions</b> --
   c# treesitter
 }
 

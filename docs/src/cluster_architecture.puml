@@ -1,5 +1,6 @@
 @startuml cluster_architecture
 
+!theme crt-amber
 
 title cluster devastation components
 
@@ -7,15 +8,16 @@ hide circle
 hide stereotypes
 
 class "cluster devastation" as ClusterDev {
-  -- <color:ORANGE><b>kubernetes tools</b></color> --
+  Theme crt-amber
+  -- <b>kubernetes tools</b> --
   kubectl
   helm
   
-  -- <color:ORANGE><b>cloud tools</b></color> --
+  -- <b>cloud tools</b> --
   aws cli v2
   terraform
   
-  -- <color:ORANGE><b>neovim cluster extensions</b></color> --
+  -- <b>neovim cluster extensions</b> --
   terraform lsp
   yaml lsp
   kubernetes treesitter

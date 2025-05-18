@@ -32,13 +32,18 @@ RUN apt-get update && apt-get install -y \
     locales \
     make \
     ripgrep \
-    plantuml \
+    default-jre \
     sudo \
     tree \
     tmux \
     unzip \
     zsh \
     && rm -rf /var/lib/apt/lists/*
+
+# Install latest PlantUML version
+RUN curl -fsSL https://github.com/plantuml/plantuml/releases/download/v1.2025.2/plantuml-1.2025.2.jar -o /usr/local/bin/plantuml.jar \
+    && echo '#!/bin/bash\njava -jar /usr/local/bin/plantuml.jar "$@"' > /usr/local/bin/plantuml \
+    && chmod +x /usr/local/bin/plantuml
 
 # Set up locale
 RUN locale-gen en_US.UTF-8
