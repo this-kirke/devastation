@@ -4,13 +4,20 @@
 USERNAME=$(whoami)
 echo "Running as user: $USERNAME"
 
-# Check if the project directory exists
-PROJECT_DIR="/home/$USERNAME/project"
-if [ -d "/project" ]; then
-    # If /project is mounted, use that
-    PROJECT_DIR="/project"
+# Use PROJECT_NAME environment variable to set project directory
+if [ -z "$PROJECT_NAME" ]; then
+    echo "ERROR: PROJECT_NAME environment variable is not set"
+    exit 1
 fi
+
+PROJECT_DIR="/src/$PROJECT_NAME"
 echo "Using project directory: $PROJECT_DIR"
+
+# Verify the project directory exists
+if [ ! -d "$PROJECT_DIR" ]; then
+    echo "ERROR: Project directory $PROJECT_DIR does not exist"
+    exit 1
+fi
 
 # Start tmux session with one window
 tmux new-session -d -s dev -c "$PROJECT_DIR" -n "shell"

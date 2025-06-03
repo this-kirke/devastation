@@ -72,5 +72,4 @@ COPY ./.config /home/$USERNAME/.config/
 RUN echo '\n-- Cluster-specific configurations\nrequire("config.lsp-cluster")\nrequire("config.treesitter-cluster")' >> /home/$USERNAME/.config/nvim/lua/plugins.lua && \
     nvim --headless "+TSInstall terraform hcl yaml json bash" +qa
 
-WORKDIR /home/$USERNAME/project
 ENTRYPOINT ["/usr/local/bin/cluster-entrypoint.sh"]

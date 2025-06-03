@@ -122,6 +122,5 @@ COPY --chown=$USERNAME:$USERNAME ./.config /home/$USERNAME/.config/
 RUN nvim --headless "+Lazy! sync" +qa && \
     nvim --headless "+TSUpdateSync" +qa
 
-WORKDIR /home/$USERNAME/project
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 

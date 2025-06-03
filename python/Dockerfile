@@ -53,5 +53,4 @@ COPY ./.config /home/$USERNAME/.config/
 RUN echo '\n-- Python-specific configurations\nrequire("config.lsp-python")\nrequire("config.dap-python")\nrequire("config.treesitter-python")' >> /home/$USERNAME/.config/nvim/lua/plugins.lua && \
     nvim --headless "+TSInstall python" +qa
 
-WORKDIR /home/$USERNAME/project
 ENTRYPOINT ["/usr/local/bin/python-entrypoint.sh"]

@@ -1,47 +1,57 @@
-# Devastation Development Guidelines
+# Devastation Development Environment
 
-## Build Commands
-- Build all containers: `make all`
-- Build specific container: `make base`, `make python`, `make cluster`
-- Clean up images: `make clean`
-- Custom user build: `make USERNAME=yourname base`
-- Run container: `docker run -it --rm devastation/base:latest`
-- Neovim plugin install: `nvim --headless "+Lazy! sync" +qa`
-- Treesitter update: `nvim --headless "+TSUpdateSync" +qa`
-- Show help: `make help`
+## Project Overview
 
-## Git Workflow
-- Commit style: Use descriptive messages with a summary line and detailed body
-- Branch naming: Use descriptive names prefixed with feature/, bugfix/, or docs/
-- Before committing: Run `git status` and `git diff` to review changes
+Devastation is a collection of Docker-based development environments built on a layered architecture. It provides pre-configured containers with Neovim, tmux, and language-specific tooling for consistent development experiences across projects.
 
-## Testing
-- Test each container by running: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --version"`
-- Check plugins: `docker run -it --rm devastation/<container>:latest zsh -c "nvim --headless '+Lazy check' +qa"`
+## Quick Start for Claude Code
 
-## Code Style
-- **Indentation**: 2 spaces for Lua, 4 spaces for other languages
+When working on Devastation:
+
+1. **Project Structure**: Base container + language-specific extensions
+2. **Container Mounting**: Projects mount to `/src/$PROJECT_NAME` with `PROJECT_NAME` env var required
+3. **Configuration**: XDG-compliant configs in `.config/` directories
+4. **Entry Point**: All containers start tmux sessions with pre-configured windows
+
+## Key Commands
+
+```bash
+# Build containers
+make base              # Base development environment
+make python           # Python + base
+make dotnet           # .NET + base  
+make cluster          # Kubernetes/DevOps + base
+
+# Run containers (new pattern)
+docker run -it --rm \
+  -v $(pwd):/src/MyProject \
+  -w /src/MyProject \
+  -e PROJECT_NAME=MyProject \
+  devastation/base:latest
+```
+
+## Documentation Structure
+
+- `claude/architecture.md` - Container architecture and relationships
+- `claude/devastation_base.md` - Base container internals and configuration
+- `claude/devastation_python.md` - Python-specific extensions
+- `claude/devastation_dotnet.md` - .NET-specific extensions  
+- `claude/devastation_cluster.md` - Kubernetes/DevOps tooling
+- `claude/configuration_patterns.md` - Neovim, tmux, and shell configuration conventions
+- `claude/development_workflow.md` - How to develop and extend devastation containers
+
+## Code Style Guidelines
+
+- **Indentation**: 2 spaces (Lua), 4 spaces (other languages)
 - **Line Length**: 80 characters maximum
-- **Naming**: camelCase for variables/functions, PascalCase for classes/types
-- **Imports**: Group external, then internal; sort alphabetically
-- **Docker**: Use continuation backslashes for multiline RUN commands
-- **Dockerfile**: Follow ARG/ENV/RUN organization with section headers
-- **Dockerfile Efficiency**: Execute commands directly in RUN statements, avoid temp scripts
-- **Error Handling**: Use pcall/xpcall pattern for Lua error handling
-- **Plugin Format**: Follow the plugin block format in plugins.lua with config functions
-- **Commit Style**: Conventional commits (feat/fix/docs/chore/refactor)
+- **Naming**: camelCase (variables/functions), PascalCase (classes/types)
+- **Docker**: Multi-line RUN with backslash continuation, grouped commands
+- **Commits**: Conventional commits (feat/fix/docs/chore/refactor)
+- **Error Handling**: Use pcall/xpcall for Lua, fail-fast for shell scripts
 
-## Repository Organization
-- Base image extends Ubuntu 22.04 with dev tools
-- Language-specific images extend base with specialized tools
-- XDG-style configuration in .config directory:
-  - Zsh config in .config/zsh/ with ZDOTDIR environment variable
-  - Tmux config in .config/tmux/tmux.conf
-  - Neovim config in .config/nvim/
-- Neovim config naming pattern:
-  - Base configs: `config/lsp-base.lua`, `config/treesitter-base.lua`, `config/dap-base.lua`
-  - Language configs: `config/lsp-python.lua`, `config/treesitter-cluster.lua`, etc.
-  - Base plugins.lua loads the `-base` configs directly
-  - Language Dockerfiles append imports for language-specific modules to plugins.lua
-- Simple config copying: `COPY ./.config /home/$USERNAME/.config/`
-- Container entry via entrypoint.sh loads tmux with pre-configured windows
+## Critical Implementation Details
+
+- **Project Directory**: `/src/$PROJECT_NAME` (not `/home/$USERNAME/project`)
+- **Environment Validation**: Containers exit(1) if `PROJECT_NAME` unset or directory missing
+- **Working Directory**: Set at runtime via docker-compose `working_dir`, not Dockerfile `WORKDIR`
+- **Entrypoint Pattern**: All entrypoints validate environment and start tmux sessions
