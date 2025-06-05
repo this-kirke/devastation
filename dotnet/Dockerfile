@@ -6,6 +6,10 @@ LABEL description=".NET development environment with Neovim, LSP, and debugging 
 # Build arguments
 ARG USERNAME=dev
 
+# Disable .NET telemetry and welcome messages
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV DOTNET_NOLOGO=1
+
 ###################
 # ROOT OPERATIONS
 ###################
@@ -21,6 +25,19 @@ RUN apt-get update && apt-get install -y \
     jq \
     && rm -rf /var/lib/apt/lists/*
 
+# Install .NET 7 SDK
+RUN DOTNET7_VERSION=7.0 && \
+    DOTNET7_JSON_URL="https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${DOTNET7_VERSION}/releases.json" && \
+    echo "Downloading from metadata URL: $DOTNET7_JSON_URL" && \
+    curl -s $DOTNET7_JSON_URL > dotnet7-releases.json && \
+    SDK7_DOWNLOAD_URL=$(jq -r '.releases[0].sdk.files[] | select(.rid=="linux-x64") | .url' dotnet7-releases.json) && \
+    echo "Using .NET 7 SDK download URL: $SDK7_DOWNLOAD_URL" && \
+    mkdir -p /usr/share/dotnet && \
+    curl -SL "$SDK7_DOWNLOAD_URL" -o dotnet7-sdk.tar.gz && \
+    tar -xzf dotnet7-sdk.tar.gz -C /usr/share/dotnet && \
+    rm dotnet7-sdk.tar.gz dotnet7-releases.json && \
+    ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+
 # Install .NET 8 SDK
 RUN DOTNET8_VERSION=8.0 && \
     DOTNET8_JSON_URL="https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${DOTNET8_VERSION}/releases.json" && \
@@ -31,8 +48,7 @@ RUN DOTNET8_VERSION=8.0 && \
     mkdir -p /usr/share/dotnet && \
     curl -SL "$SDK8_DOWNLOAD_URL" -o dotnet8-sdk.tar.gz && \
     tar -xzf dotnet8-sdk.tar.gz -C /usr/share/dotnet && \
-    rm dotnet8-sdk.tar.gz dotnet8-releases.json && \
-    ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+    rm dotnet8-sdk.tar.gz dotnet8-releases.json
 
 # Install .NET 9 SDK
 RUN DOTNET9_VERSION=9.0 && \
